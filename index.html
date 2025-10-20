@@ -139,38 +139,30 @@ print(capitales)</code></pre>
         </article>
 
         <article class="method">
-            <h2>Leer CSV con manejo de errores</h2>
-            <p>Lee un archivo CSV con manejo de excepciones para evitar que el programa falle.</p>
+            <h2>Manejo de archivos CSV</h2>
+            <p>Lee y escribe archivos CSV con manejo de errores completo.</p>
             <div class="code-container">
                 <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
                 <pre><code>import csv
 
-FILE_ERROR = 'archivo_error.csv'
+# Lectura de archivo CSV con manejo de errores
+FILE = 'datos.csv'
 paises = []
 capitales = []
 
 try:
-    with open(FILE_ERROR, 'r', encoding='utf-8') as archivo:
+    with open(FILE, 'r', encoding='utf-8') as archivo:
         lector = csv.reader(archivo)
         for fila in lector:
             paises.append(fila[0])
             capitales.append(fila[1])
 except FileNotFoundError:
-    print("El archivo", FILE_ERROR, "no existe.")
+    print("El archivo", FILE, "no existe.")
 else:
     print(paises)
-    print(capitales)</code></pre>
-            </div>
-        </article>
+    print(capitales)
 
-        <article class="method">
-            <h2>Escribir archivo CSV</h2>
-            <p>Escribe información de listas en un archivo CSV.</p>
-            <div class="code-container">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <pre><code>import csv
-
-FILE = 'datos.csv'
+# Escritura de archivo CSV
 paises = ['Argentina', 'Perú', 'Chile', 'Bolivia', 'Paraguay']
 capitales = ['Buenos Aires', 'Lima', 'Santiago de Chile', 'La Paz', 'Asunción']
 
@@ -182,109 +174,43 @@ with open(FILE, 'w', newline='', encoding='utf-8') as archivo:
         </article>
 
         <article class="method">
-            <h2>Escribir archivo TXT - write()</h2>
-            <p>Escribe contenido en un archivo de texto usando write() en modo 'a' (append).</p>
+            <h2>Manejo de archivos TXT</h2>
+            <p>Lee y escribe archivos de texto con manejo de errores usando try/except/finally.</p>
             <div class="code-container">
                 <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
                 <pre><code>from random import randint
 
-def crear_fila_none(f):
-    res = [None]*f
-    return res
-
-def llenar_lista(fila):
-    for i in range(len(fila)):
-        fila[i] = randint(1,10)
-
-def escribir_archivo(fname, contenido):
-    fd = open(fname, 'a')
-    for elemento in contenido:
-        fd.write(str(elemento)+ ' ')
-    fd.write('\n')
-    fd.close()
-
-FILE = 'filas.txt'
-fila = crear_fila_none(5)
-llenar_lista(fila)
-escribir_archivo(FILE, fila)
-print(fila)</code></pre>
-            </div>
-        </article>
-
-        <article class="method">
-            <h2>Leer archivo TXT - read()</h2>
-            <p>Lee todo el contenido de un archivo de texto de una vez usando read().</p>
-            <div class="code-container">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <pre><code>def leer_archivo(fn):
-    fd = open(fn, 'r')
-    cont = fd.read()
-    fd.close()
-    return cont
-
-FILE = 'datos.txt'
-contenido = leer_archivo(FILE)
-print('CONTENIDO DEL ARCHIVO')
-print(contenido)</code></pre>
-            </div>
-        </article>
-
-        <article class="method">
-            <h2>Leer archivo TXT - readline()</h2>
-            <p>Lee un archivo línea por línea usando readline().</p>
-            <div class="code-container">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <pre><code>def imprimir_archivo(fn):
-    fd = open(fn, 'r')
-    line = fd.readline()  # La primer línea la descarto
-    while line:
-        print(line)
-        line = fd.readline()
-    fd.close()
-    return
-
-FILE = 'datos.txt'
-arch = imprimir_archivo(FILE)</code></pre>
-            </div>
-        </article>
-
-        <article class="method">
-            <h2>Leer archivo TXT - for con fd</h2>
-            <p>Lee un archivo iterando directamente sobre el descriptor de archivo.</p>
-            <div class="code-container">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <pre><code>def ver_for_fd(fn):
-    fd = open(fn, 'r')
-    res = []
-    fd.readline()  # Leo e ignoro la primer línea
-    for line in fd:
-        print(line)
-        res.append(line[:-1])
-    fd.close()
-    return res
-
-FILE = 'datos.txt'
-lista = ver_for_fd(FILE)
-print(lista)</code></pre>
-            </div>
-        </article>
-
-        <article class="method">
-            <h2>Manejo de errores - FileNotFoundError</h2>
-            <p>Gestión de errores al abrir archivos usando try/except/finally.</p>
-            <div class="code-container">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <pre><code>try:
-    fn = input('Ingrese el nombre del archivo a abrir: ')
+# Lectura de archivo TXT con try/except
+try:
+    fn = 'datos.txt'
     fd = None
     fd = open(fn, 'r')
-    line = fd.readline()
+    contenido = fd.read()
+    print(contenido)
 except FileNotFoundError:
-    print('El archivo no existe. Ingrese otro archivo.')
+    print('El archivo no existe.')
 finally:
     if fd:
-        print('cerrando el archivo')
-        fd.close()</code></pre>
+        fd.close()
+
+# Escritura de archivo TXT con try/except
+def escribir_archivo(fname, contenido):
+    fd = None
+    try:
+        fd = open(fname, 'a')
+        for elemento in contenido:
+            fd.write(str(elemento) + ' ')
+        fd.write('\n')
+    except Exception as e:
+        print(f'Error al escribir archivo: {e}')
+    finally:
+        if fd:
+            fd.close()
+
+FILE = 'filas.txt'
+fila = [randint(1,10) for _ in range(5)]
+escribir_archivo(FILE, fila)
+print(fila)</code></pre>
             </div>
         </article>
 
