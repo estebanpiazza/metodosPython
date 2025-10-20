@@ -16,7 +16,9 @@
         <article class="method">
             <h2>split_custom()</h2>
             <p>Divide una cadena en una lista de palabras.</p>
-            <pre><code>def split_custom(texto, separador=" "):
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>def split_custom(texto, separador=" "):
     resultado = []
     palabra = ""
     for char in texto:
@@ -33,12 +35,15 @@
 # Ejemplo
 texto = "Hola cómo estás?"
 resultado = split_custom(texto)  # ['Hola', 'cómo', 'estás?']</code></pre>
+            </div>
         </article>
 
         <article class="method">
             <h2>strip_custom()</h2>
             <p>Elimina los espacios en blanco al inicio y al final de una cadena.</p>
-            <pre><code>def strip_custom(texto):
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>def strip_custom(texto):
     inicio, fin = 0, len(texto) - 1
     while inicio <= fin and texto[inicio] == " ":
         inicio += 1
@@ -49,12 +54,15 @@ resultado = split_custom(texto)  # ['Hola', 'cómo', 'estás?']</code></pre>
 # Ejemplo
 texto = "  Hola mundo  "
 resultado = strip_custom(texto)  # "Hola mundo"</code></pre>
+            </div>
         </article>
 
         <article class="method">
             <h2>upper_custom()</h2>
             <p>Convierte todos los caracteres de una cadena a mayúsculas.</p>
-            <pre><code>def upper_custom(texto):
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>def upper_custom(texto):
     resultado = ""
     for char in texto:
         if 'a' <= char <= 'z':
@@ -66,12 +74,15 @@ resultado = strip_custom(texto)  # "Hola mundo"</code></pre>
 # Ejemplo
 texto = "hola"
 resultado = upper_custom(texto)  # "HOLA"</code></pre>
+            </div>
         </article>
 
         <article class="method">
             <h2>lower_custom()</h2>
             <p>Convierte todos los caracteres de una cadena a minúsculas.</p>
-            <pre><code>def lower_custom(texto):
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>def lower_custom(texto):
     resultado = ""
     for char in texto:
         if 'A' <= char <= 'Z':
@@ -83,12 +94,15 @@ resultado = upper_custom(texto)  # "HOLA"</code></pre>
 # Ejemplo
 texto = "HOLA"
 resultado = lower_custom(texto)  # "hola"</code></pre>
+            </div>
         </article>
 
         <article class="method">
             <h2>ordenar_custom()</h2>
             <p>Ordena una lista de elementos en orden ascendente.</p>
-            <pre><code>def ordenar_custom(lista):
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>def ordenar_custom(lista):
     for i in range(len(lista)):
         for j in range(i + 1, len(lista)):
             if lista[i] > lista[j]:
@@ -98,6 +112,197 @@ resultado = lower_custom(texto)  # "hola"</code></pre>
 # Ejemplo
 numeros = [3, 1, 4, 1, 5]
 resultado = ordenar_custom(numeros)  # [1, 1, 3, 4, 5]</code></pre>
+            </div>
+        </article>
+
+        <article class="method">
+            <h2>Leer archivo CSV</h2>
+            <p>Lee un archivo CSV y guarda su información en listas.</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>import csv
+
+FILE = 'datos.csv'
+paises = []
+capitales = []
+
+with open(FILE, 'r', encoding='utf-8') as archivo:
+    lector = csv.reader(archivo)
+    for fila in lector:
+        print(fila)
+        paises.append(fila[0])
+        capitales.append(fila[1])
+
+print(paises)
+print(capitales)</code></pre>
+            </div>
+        </article>
+
+        <article class="method">
+            <h2>Leer CSV con manejo de errores</h2>
+            <p>Lee un archivo CSV con manejo de excepciones para evitar que el programa falle.</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>import csv
+
+FILE_ERROR = 'archivo_error.csv'
+paises = []
+capitales = []
+
+try:
+    with open(FILE_ERROR, 'r', encoding='utf-8') as archivo:
+        lector = csv.reader(archivo)
+        for fila in lector:
+            paises.append(fila[0])
+            capitales.append(fila[1])
+except FileNotFoundError:
+    print("El archivo", FILE_ERROR, "no existe.")
+else:
+    print(paises)
+    print(capitales)</code></pre>
+            </div>
+        </article>
+
+        <article class="method">
+            <h2>Escribir archivo CSV</h2>
+            <p>Escribe información de listas en un archivo CSV.</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>import csv
+
+FILE = 'datos.csv'
+paises = ['Argentina', 'Perú', 'Chile', 'Bolivia', 'Paraguay']
+capitales = ['Buenos Aires', 'Lima', 'Santiago de Chile', 'La Paz', 'Asunción']
+
+with open(FILE, 'w', newline='', encoding='utf-8') as archivo:
+    escritor = csv.writer(archivo)
+    for i in range(len(paises)):
+        escritor.writerow([paises[i], capitales[i]])</code></pre>
+            </div>
+        </article>
+
+        <article class="method">
+            <h2>Escribir archivo TXT - write()</h2>
+            <p>Escribe contenido en un archivo de texto usando write() en modo 'a' (append).</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>from random import randint
+
+def crear_fila_none(f):
+    res = [None]*f
+    return res
+
+def llenar_lista(fila):
+    for i in range(len(fila)):
+        fila[i] = randint(1,10)
+
+def escribir_archivo(fname, contenido):
+    fd = open(fname, 'a')
+    for elemento in contenido:
+        fd.write(str(elemento)+ ' ')
+    fd.write('\n')
+    fd.close()
+
+FILE = 'filas.txt'
+fila = crear_fila_none(5)
+llenar_lista(fila)
+escribir_archivo(FILE, fila)
+print(fila)</code></pre>
+            </div>
+        </article>
+
+        <article class="method">
+            <h2>Leer archivo TXT - read()</h2>
+            <p>Lee todo el contenido de un archivo de texto de una vez usando read().</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>def leer_archivo(fn):
+    fd = open(fn, 'r')
+    cont = fd.read()
+    fd.close()
+    return cont
+
+FILE = 'datos.txt'
+contenido = leer_archivo(FILE)
+print('CONTENIDO DEL ARCHIVO')
+print(contenido)</code></pre>
+            </div>
+        </article>
+
+        <article class="method">
+            <h2>Leer archivo TXT - readline()</h2>
+            <p>Lee un archivo línea por línea usando readline().</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>def imprimir_archivo(fn):
+    fd = open(fn, 'r')
+    line = fd.readline()  # La primer línea la descarto
+    while line:
+        print(line)
+        line = fd.readline()
+    fd.close()
+    return
+
+FILE = 'datos.txt'
+arch = imprimir_archivo(FILE)</code></pre>
+            </div>
+        </article>
+
+        <article class="method">
+            <h2>Leer archivo TXT - for con fd</h2>
+            <p>Lee un archivo iterando directamente sobre el descriptor de archivo.</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>def ver_for_fd(fn):
+    fd = open(fn, 'r')
+    res = []
+    fd.readline()  # Leo e ignoro la primer línea
+    for line in fd:
+        print(line)
+        res.append(line[:-1])
+    fd.close()
+    return res
+
+FILE = 'datos.txt'
+lista = ver_for_fd(FILE)
+print(lista)</code></pre>
+            </div>
+        </article>
+
+        <article class="method">
+            <h2>Manejo de errores - FileNotFoundError</h2>
+            <p>Gestión de errores al abrir archivos usando try/except/finally.</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>try:
+    fn = input('Ingrese el nombre del archivo a abrir: ')
+    fd = None
+    fd = open(fn, 'r')
+    line = fd.readline()
+except FileNotFoundError:
+    print('El archivo no existe. Ingrese otro archivo.')
+finally:
+    if fd:
+        print('cerrando el archivo')
+        fd.close()</code></pre>
+            </div>
+        </article>
+
+        <article class="method">
+            <h2>Manejo de múltiples excepciones</h2>
+            <p>Gestión de diferentes tipos de errores con try/except.</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <pre><code>res = None
+while res is None:
+    try:
+        res = int(input('Ingrese numerador: ')) / int(input('Ingrese denominador: '))
+    except ZeroDivisionError:
+        print('El denominador no puede ser cero')
+    except ValueError as val:
+        print(str(val))
+print(res)</code></pre>
+            </div>
         </article>
 
 
@@ -106,5 +311,34 @@ resultado = ordenar_custom(numeros)  # [1, 1, 3, 4, 5]</code></pre>
     <footer>
         <p>Creado para facilitar el aprendizaje de Python</p>
     </footer>
+
+    <script>
+        function copiarCodigo(boton) {
+            // Obtener el elemento pre dentro del mismo contenedor
+            const codeContainer = boton.parentElement;
+            const codeElement = codeContainer.querySelector('code');
+            const codigo = codeElement.textContent;
+            
+            // Copiar al portapapeles
+            navigator.clipboard.writeText(codigo).then(function() {
+                // Cambiar el texto del botón temporalmente
+                const textoOriginal = boton.textContent;
+                boton.textContent = '¡Copiado!';
+                boton.classList.add('copied');
+                
+                // Restaurar después de 2 segundos
+                setTimeout(function() {
+                    boton.textContent = textoOriginal;
+                    boton.classList.remove('copied');
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Error al copiar: ', err);
+                boton.textContent = 'Error';
+                setTimeout(function() {
+                    boton.textContent = 'Copiar';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
